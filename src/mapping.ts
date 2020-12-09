@@ -20,12 +20,13 @@ export function handleProtoUpdated(event: ProtoUpdated): void {
 }
 
 export function handleSeasonStarted(event: SeasonStarted): void {
-  let season = Season.load(event.params.id.toString());
+  let seasonid=BigInt.fromI32(event.params.id).toString()
+  let season = Season.load(seasonid);
   if (season == null) {
-    season = new Season(event.params.id.toString());
+    season = new Season(seasonid);
   }
-  season.high=event.params.high
-  season.low=event.params.low
+  season.high=BigInt.fromI32(event.params.high)
+  season.low=BigInt.fromI32(event.params.low)
   season.name=event.params.name
   season.save()
 }
@@ -39,12 +40,12 @@ export function handleQualityChanged(event: QualityChanged): void {
 export function handleCardsMinted(event: CardsMinted): void {
   var j=BigInt.fromI32(0)
   var arrayproto=event.params.protos
-  var arrayquality=event.params.protos
+  var arrayquality=event.params.qualities
   for (let i=0;i<event.params.protos.length;i++)
   {
     let card=createcard(event.params.start+j)
-    card.proto=BigInt.fromI32(arrayproto[i])
-    card.quality=BigInt.fromI32(arrayquality[i])
+    card.proto=arrayproto[i]
+    card.quality=arrayquality[i]
     card.save()
     j=j+BigInt.fromI32(1)
   }

@@ -3,9 +3,9 @@ type Card @entity {
   "Rarity"
   id: ID!
   "Proto id"
-  proto: BigInt
+  proto: Int
   "Rarities owner"
-  quality: BigInt
+  quality: Int
   "Player owning the card"
   owner: Player
 }

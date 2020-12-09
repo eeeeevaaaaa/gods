@@ -42,38 +42,22 @@ export class Card extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get proto(): BigInt | null {
+  get proto(): i32 {
     let value = this.get("proto");
-    if (value === null || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBigInt();
-    }
+    return value.toI32();
   }
 
-  set proto(value: BigInt | null) {
-    if (value === null) {
-      this.unset("proto");
-    } else {
-      this.set("proto", Value.fromBigInt(value as BigInt));
-    }
+  set proto(value: i32) {
+    this.set("proto", Value.fromI32(value));
   }
 
-  get quality(): BigInt | null {
+  get quality(): i32 {
     let value = this.get("quality");
-    if (value === null || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBigInt();
-    }
+    return value.toI32();
   }
 
-  set quality(value: BigInt | null) {
-    if (value === null) {
-      this.unset("quality");
-    } else {
-      this.set("quality", Value.fromBigInt(value as BigInt));
-    }
+  set quality(value: i32) {
+    this.set("quality", Value.fromI32(value));
   }
 
   get owner(): string | null {
