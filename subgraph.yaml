@@ -1,0 +1,51 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: gods
+    network: mainnet
+    source:
+      address: "0x0e3a2a1f2146d86a604adc220b4967a898d7fe07"
+      abi: gods
+      startBlock: 8945000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - ProtoUpdated
+        - SeasonStarted
+        - QualityChanged
+        - CardsMinted
+        - ClassPropertySet
+        - TokenPropertySet
+        - Transfer
+        - Approval
+        - ApprovalForAll
+        - OwnershipTransferred
+      abis:
+        - name: gods
+          file: ./abis/gods.json
+      eventHandlers:
+        - event: ProtoUpdated(indexed uint16)
+          handler: handleProtoUpdated
+        - event: SeasonStarted(indexed uint16,string,indexed uint16,indexed uint16)
+          handler: handleSeasonStarted
+        - event: QualityChanged(indexed uint256,uint8,address)
+          handler: handleQualityChanged
+        - event: CardsMinted(indexed uint256,address,uint16[],uint8[])
+          handler: handleCardsMinted
+        - event: ClassPropertySet(indexed bytes32,bytes32)
+          handler: handleClassPropertySet
+        - event: TokenPropertySet(indexed uint256,indexed bytes32,bytes32)
+          handler: handleTokenPropertySet
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+        - event: Approval(indexed address,indexed address,indexed uint256)
+          handler: handleApproval
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+      file: ./src/mapping.ts

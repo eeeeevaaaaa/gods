@@ -1,0 +1,40 @@
+
+type Card @entity {
+  "Rarity"
+  id: ID!
+  "Proto id"
+  proto: BigInt
+  "Rarities owner"
+  quality: BigInt
+  "Player owning the card"
+  owner: Player
+}
+
+type Player @entity {
+  "Players ethereum address"
+  id: ID!
+  "Players cards"
+  cards:[Card!] @derivedFrom(field: "owner")
+}
+
+type TransferCard @entity {
+  "[Tx] -  [card id]"
+  id: ID!
+  "From player"
+  from: Player
+  "To player"
+  to: Player
+
+}
+
+type Season @entity {
+  "Season id"
+  id: ID!
+  "Name"
+  name: String
+  "Season low"
+  low: BigInt
+  "Season high"
+  high: BigInt
+}
+
