@@ -5,8 +5,8 @@ export function createcard(cardid: BigInt): Card {
     let card = Card.load(cardid.toString());
     if (card == null) {
         card = new Card(cardid.toString());
+        card.save()
     }
-    card.save()
     return card as Card
 }
 
@@ -14,7 +14,7 @@ export function createplayer(address: Address): Player {
     let player = Player.load(address.toHex());
     if (player == null) {
         player = new Player(address.toHex());
+        player.save()
     }
-    player.save()
     return player as Player
 }

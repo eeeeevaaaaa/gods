@@ -1,23 +1,15 @@
 import { BigInt } from "@graphprotocol/graph-ts"
 import {
   gods,
-  ProtoUpdated,
   SeasonStarted,
   QualityChanged,
   CardsMinted,
-  ClassPropertySet,
-  TokenPropertySet,
-  Transfer,
-  Approval,
-  ApprovalForAll,
-  OwnershipTransferred
+  Transfer
 } from "../generated/gods/gods"
 import { Card, Player, Season, TransferCard } from "../generated/schema"
 
 import {createcard, createplayer} from "../src/helpers/helpers"
 
-export function handleProtoUpdated(event: ProtoUpdated): void {
-}
 
 export function handleSeasonStarted(event: SeasonStarted): void {
   let seasonid=BigInt.fromI32(event.params.id).toString()
@@ -51,11 +43,6 @@ export function handleCardsMinted(event: CardsMinted): void {
   }
 }
 
-export function handleClassPropertySet(event: ClassPropertySet): void {
-}
-
-export function handleTokenPropertySet(event: TokenPropertySet): void {
-}
 
 export function handleTransfer(event: Transfer): void {
   let card=createcard(event.params.tokenId)
@@ -72,10 +59,5 @@ export function handleTransfer(event: Transfer): void {
   card.save()
 }
 
-export function handleApproval(event: Approval): void {}
-
-export function handleApprovalForAll(event: ApprovalForAll): void {}
-
-export function handleOwnershipTransferred(event: OwnershipTransferred): void {}
 
 
